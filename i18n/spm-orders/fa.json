@@ -1,0 +1,55 @@
+{
+  "toolbar": {
+    "title": "پیگیری سفارش‌ها",
+    "description": "همهٔ سفارش‌های ارسال‌شده به سامانهٔ معاملات (OMS)، بر پایهٔ مرحله‌ای که در چرخهٔ عمر خود قرار دارند."
+  },
+  "summary": {
+    "total": "کل سفارش‌ها",
+    "awaiting": "در انتظار پاسخ OMS",
+    "partial": "اجرای جزئی",
+    "failed": "ناموفق"
+  },
+  "board": {
+    "title": "تابلوی سفارش‌ها"
+  },
+  "tabs": {
+    "all": "همه",
+    "Pending": "در صف ارسال",
+    "AwaitingResponse": "در انتظار پاسخ",
+    "Partial": "اجرای جزئی",
+    "Executed": "اجراشده",
+    "Failed": "ناموفق"
+  },
+  "filters": {
+    "searchPlaceholder": "جست‌وجوی شناسهٔ OMS، شمارهٔ درخواست یا نماد"
+  },
+  "table": {
+    "omsRef": "شناسهٔ OMS",
+    "requestNumber": "درخواست",
+    "symbol": "نماد",
+    "side": "سمت",
+    "quantity": "تعداد",
+    "filled": "اجراشده",
+    "price": "قیمت",
+    "status": "وضعیت",
+    "placedAt": "زمان ثبت",
+    "lastPolledAt": "آخرین استعلام",
+    "viewRequest": "مشاهدهٔ درخواست",
+    "empty": "سفارشی با این فیلتر یافت نشد."
+  },
+  "side": {
+    "Buy": "خرید",
+    "Sell": "فروش"
+  },
+  "status": {
+    "Pending": "در صف ارسال",
+    "AwaitingResponse": "در انتظار پاسخ",
+    "Partial": "اجرای جزئی",
+    "Executed": "اجراشده",
+    "Cancelled": "لغوشده",
+    "Failed": "ناموفق"
+  },
+  "errors": {
+    "loadFailed": "بارگذاری سفارش‌ها ناموفق بود."
+  }
+}

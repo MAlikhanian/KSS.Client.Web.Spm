@@ -1,0 +1,58 @@
+{
+  "title": "گردش حساب",
+  "toolbar": {
+    "description": "دفتر کل فقط‌افزودنی حساب سرمایه‌گذار: همه گردش‌ها به‌همراه مانده در هر مرحله. این صفحه فقط خواندنی است."
+  },
+  "actions": {
+    "print": "چاپ"
+  },
+  "filters": {
+    "title": "دامنه صورت‌حساب",
+    "account": "حساب",
+    "accountPlaceholder": "یک حساب را انتخاب کنید",
+    "flowType": "نوع گردش",
+    "direction": "جهت",
+    "search": "جستجو",
+    "searchPlaceholder": "جستجو در شرح…",
+    "all": "همه"
+  },
+  "tiles": {
+    "totalUnits": "مجموع واحدهای در تملک",
+    "balance": "مانده جاری",
+    "entries": "تعداد اقلام"
+  },
+  "table": {
+    "valueDate": "تاریخ ارزش",
+    "description": "شرح",
+    "flowType": "نوع گردش",
+    "direction": "جهت",
+    "amount": "مبلغ",
+    "balanceAfter": "مانده پس از تراکنش",
+    "empty": "هیچ قلمی با فیلترهای فعلی یافت نشد.",
+    "noAccount": "برای مشاهده صورت‌حساب، یک حساب را انتخاب کنید."
+  },
+  "flow": {
+    "depositIn": "واریز وجه",
+    "unitsPurchased": "خرید واحد",
+    "unitsSold": "فروش واحد",
+    "withdrawalOut": "برداشت وجه",
+    "fee": "کارمزد",
+    "adjustment": "اصلاح دستی"
+  },
+  "direction": {
+    "debit": "بدهکار",
+    "credit": "بستانکار"
+  },
+  "statement": {
+    "title": "صورت‌حساب",
+    "nationalId": "کد ملی",
+    "iban": "شماره شبا",
+    "readOnlyNote": "این دفتر فقط‌افزودنی است — اقلام هرگز ویرایش یا حذف نمی‌شوند و هر اصلاح به‌صورت یک قلم اصلاحی تازه ثبت می‌گردد."
+  },
+  "errors": {
+    "loadFailed": "بارگذاری صورت‌حساب ممکن نشد"
+  },
+  "common": {
+    "rial": "ریال"
+  }
+}

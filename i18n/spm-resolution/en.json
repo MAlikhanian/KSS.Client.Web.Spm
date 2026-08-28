@@ -1,0 +1,70 @@
+{
+  "toolbar": {
+    "title": "Manual resolution",
+    "description": "Work queue for cases that need a human decision. Every case carries a 2-business-hour SLA clock."
+  },
+  "tiles": {
+    "title": "Queue at a glance",
+    "open": "Open",
+    "assigned": "Assigned",
+    "waiting": "Waiting",
+    "overdue": "Overdue"
+  },
+  "filters": {
+    "status": "Status",
+    "all": "All statuses",
+    "unassignedOnly": "Unassigned only",
+    "showing": "Showing {{shown}} of {{total}} cases"
+  },
+  "status": {
+    "Open": "Open",
+    "Assigned": "Assigned",
+    "Waiting": "Waiting",
+    "Resolved": "Resolved",
+    "Closed": "Closed"
+  },
+  "source": {
+    "Request": "Request",
+    "Order": "Order",
+    "Settlement": "Settlement",
+    "Payment": "Payment",
+    "Discrepancy": "Discrepancy",
+    "Adjustment": "Adjustment"
+  },
+  "sla": {
+    "stopped": "Clock stopped",
+    "overdue": "Overdue by {{hours}}h",
+    "dueNow": "Due now",
+    "remaining": "{{hours}}h left"
+  },
+  "table": {
+    "title": "Cases",
+    "caseNumber": "Case no.",
+    "caseTitle": "Title",
+    "status": "Status",
+    "source": "Source",
+    "assignedTo": "Assigned to",
+    "openedAt": "Opened at",
+    "sla": "SLA",
+    "unassigned": "Unassigned",
+    "empty": "No cases match these filters."
+  },
+  "detail": {
+    "title": "Case detail",
+    "placeholder": "Select a case from the list above to see its detail.",
+    "source": "Source",
+    "assignee": "Assignee",
+    "openedAt": "Opened at",
+    "dueAt": "Due at (SLA)",
+    "resolvedAt": "Resolved at",
+    "notes": "Notes",
+    "noNotes": "No notes recorded on this case yet."
+  },
+  "sidebar": {
+    "title": "Cases by status",
+    "total": "Total cases",
+    "unassigned": "Unassigned",
+    "overdue": "Past SLA"
+  },
+  "error": "Could not load the resolution queue."
+}

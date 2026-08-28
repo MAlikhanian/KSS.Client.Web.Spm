@@ -1,0 +1,64 @@
+{
+  "toolbar": {
+    "title": "صف درخواست‌ها",
+    "description": "همه درخواست‌های واریز و برداشت، به همراه جایگاه هر کدام در چرخه تسویه."
+  },
+  "tiles": {
+    "total": "کل درخواست‌ها",
+    "totalHint": "همه درخواست‌های موجود در صف",
+    "awaiting": "در انتظار اقدام",
+    "awaitingHint": "هنوز تسویه یا بسته نشده‌اند",
+    "manualReview": "نیازمند بررسی دستی",
+    "manualReviewHint": "برای بررسی توسط کارشناس علامت‌گذاری شده",
+    "failed": "ناموفق یا رد شده",
+    "failedHint": "بدون تسویه پایان یافته‌اند"
+  },
+  "filters": {
+    "title": "فیلترها",
+    "searchLabel": "جستجو",
+    "searchPlaceholder": "شماره درخواست یا نام سرمایه‌گذار…",
+    "typeLabel": "نوع",
+    "statusLabel": "وضعیت",
+    "all": "همه",
+    "clear": "پاک کردن فیلترها"
+  },
+  "table": {
+    "title": "درخواست‌ها",
+    "count": "{{shown}} از {{total}}",
+    "number": "شماره درخواست",
+    "type": "نوع",
+    "investor": "سرمایه‌گذار",
+    "instrument": "نماد",
+    "amount": "مبلغ (ریال)",
+    "units": "تعداد واحد",
+    "status": "وضعیت",
+    "submitted": "تاریخ ثبت",
+    "flags": "بررسی",
+    "actions": "عملیات",
+    "empty": "هیچ درخواستی با فیلترهای فعلی مطابقت ندارد.",
+    "manualReview": "دستی",
+    "manualReviewHint": "برای بررسی دستی علامت‌گذاری شده است",
+    "open": "مشاهده روند درخواست"
+  },
+  "type": {
+    "Deposit": "واریز",
+    "Withdrawal": "برداشت"
+  },
+  "status": {
+    "Draft": "پیش‌نویس",
+    "Submitted": "ثبت‌شده",
+    "Validated": "اعتبارسنجی‌شده",
+    "AwaitingPayment": "در انتظار پرداخت",
+    "Paid": "پرداخت‌شده",
+    "OrderPlaced": "سفارش ارسال‌شده",
+    "PartiallyFilled": "اجرای جزئی",
+    "Filled": "اجرا‌شده",
+    "Settled": "تسویه‌شده",
+    "Rejected": "رد‌شده",
+    "Failed": "ناموفق",
+    "Cancelled": "لغو‌شده"
+  },
+  "error": {
+    "title": "بارگذاری درخواست‌ها ممکن نشد"
+  }
+}

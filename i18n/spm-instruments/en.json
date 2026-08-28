@@ -1,0 +1,76 @@
+{
+  "pageTitle": "Instruments",
+  "toolbar": {
+    "description": "The tradable instrument catalog and the limits each one enforces on investor orders."
+  },
+  "errors": {
+    "loadFailed": "The instrument catalog could not be loaded."
+  },
+  "summary": {
+    "title": "Catalog at a glance",
+    "activeInstruments": "Active instruments",
+    "activeOfTotal": "of {{total}} in the catalog",
+    "lowestMin": "Lowest minimum amount",
+    "lowestMinHint": "IRR — the smallest order the catalog accepts",
+    "highestMax": "Highest maximum amount",
+    "highestMaxHint": "IRR — the largest order the catalog accepts",
+    "earliestCutOff": "Earliest cut-off",
+    "earliestCutOffHint": "First daily deadline across active instruments",
+    "combinedRange": "Across active instruments an order may be between {{min}} and {{max}} IRR.",
+    "noActive": "No instrument is active — no new investment order can be accepted."
+  },
+  "filters": {
+    "title": "Find an instrument",
+    "searchLabel": "Search",
+    "searchPlaceholder": "Symbol, name or instrument type…",
+    "statusLabel": "Status",
+    "all": "All instruments",
+    "activeOnly": "Active only",
+    "inactiveOnly": "Inactive only"
+  },
+  "empty": {
+    "noInstruments": "No instrument matches the current filters."
+  },
+  "status": {
+    "active": "Active",
+    "inactive": "Inactive"
+  },
+  "window": {
+    "scheduled": "Not yet effective",
+    "inEffect": "Rule in effect",
+    "ended": "Rule expired"
+  },
+  "instrument": {
+    "nav": "NAV per unit",
+    "navHint": "IRR per unit — the price the order is struck at",
+    "type": "Instrument type",
+    "typeHint": "Determines which order rules apply"
+  },
+  "rule": {
+    "title": "Order rules and limits",
+    "minAmount": "Minimum amount",
+    "minAmountHint": "IRR — a smaller order is rejected",
+    "maxAmount": "Maximum amount",
+    "maxAmountHint": "IRR — a larger order is rejected",
+    "minUnits": "Minimum units",
+    "minUnitsHint": "Smallest unit quantity per order",
+    "cutOff": "Cut-off time",
+    "cutOffHint": "Orders after this roll to the next trading day",
+    "settlement": "Settlement",
+    "settlementHint": "{{days}} business day(s) after the trade date",
+    "effectiveFrom": "Effective from",
+    "effectiveFromHint": "First day this rule applies",
+    "effectiveTo": "Effective to",
+    "effectiveToHint": "Last day this rule applies",
+    "openEnded": "Open ended",
+    "openEndedHint": "No end date — applies until withdrawn",
+    "windowState": "Rule window",
+    "windowStateHint": "Checked against today, {{today}}"
+  },
+  "types": {
+    "FixedIncomeEtf": "Fixed income ETF",
+    "EquityEtf": "Equity ETF",
+    "MixedFund": "Mixed fund",
+    "GoldEtf": "Gold ETF"
+  }
+}

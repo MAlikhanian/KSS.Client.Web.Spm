@@ -1,0 +1,64 @@
+{
+  "toolbar": {
+    "title": "Request queue",
+    "description": "Every deposit and withdrawal request, with its position in the settlement pipeline."
+  },
+  "tiles": {
+    "total": "Total requests",
+    "totalHint": "All requests in the queue",
+    "awaiting": "Awaiting action",
+    "awaitingHint": "Not yet settled or closed",
+    "manualReview": "Needs manual review",
+    "manualReviewHint": "Flagged for an operator",
+    "failed": "Failed or rejected",
+    "failedHint": "Ended without settlement"
+  },
+  "filters": {
+    "title": "Filters",
+    "searchLabel": "Search",
+    "searchPlaceholder": "Request number or investor name…",
+    "typeLabel": "Type",
+    "statusLabel": "Status",
+    "all": "All",
+    "clear": "Clear filters"
+  },
+  "table": {
+    "title": "Requests",
+    "count": "{{shown}} of {{total}}",
+    "number": "Request No.",
+    "type": "Type",
+    "investor": "Investor",
+    "instrument": "Instrument",
+    "amount": "Amount (IRR)",
+    "units": "Units",
+    "status": "Status",
+    "submitted": "Submitted",
+    "flags": "Review",
+    "actions": "Actions",
+    "empty": "No request matches the current filters.",
+    "manualReview": "Manual",
+    "manualReviewHint": "Flagged for manual review",
+    "open": "Open timeline"
+  },
+  "type": {
+    "Deposit": "Deposit",
+    "Withdrawal": "Withdrawal"
+  },
+  "status": {
+    "Draft": "Draft",
+    "Submitted": "Submitted",
+    "Validated": "Validated",
+    "AwaitingPayment": "Awaiting payment",
+    "Paid": "Paid",
+    "OrderPlaced": "Order placed",
+    "PartiallyFilled": "Partially filled",
+    "Filled": "Filled",
+    "Settled": "Settled",
+    "Rejected": "Rejected",
+    "Failed": "Failed",
+    "Cancelled": "Cancelled"
+  },
+  "error": {
+    "title": "Could not load requests"
+  }
+}

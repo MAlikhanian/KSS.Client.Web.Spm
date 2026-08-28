@@ -1,0 +1,63 @@
+{
+  "toolbar": {
+    "title": "Settlements",
+    "description": "Settlement queue — what is due, what is late, and what still has to be paid out."
+  },
+  "tiles": {
+    "dueToday": "Due today",
+    "delayed": "Delayed",
+    "delayedHint": "Needs an operator",
+    "failed": "Failed",
+    "failedHint": "Needs an operator",
+    "settled": "Settled this period",
+    "settledHint": "Paid out in full",
+    "outstanding": "Outstanding net payable",
+    "outstandingHint": "Not yet settled"
+  },
+  "attention": {
+    "title": "Needs attention — delayed & failed",
+    "count": "{{items}} to act on",
+    "empty": "No delayed or failed settlements. Nothing to act on."
+  },
+  "table": {
+    "title": "Settlement queue",
+    "requestNumber": "Request no.",
+    "investor": "Investor",
+    "status": "Status",
+    "tradeDate": "Trade date",
+    "dueDate": "Settlement due",
+    "gross": "Gross amount",
+    "fee": "Fee",
+    "netPayable": "Net payable",
+    "paidAt": "Paid at",
+    "failureReason": "Failure reason",
+    "empty": "No settlement matches the current filters."
+  },
+  "filters": {
+    "status": "Status",
+    "allStatuses": "All statuses",
+    "search": "Request number",
+    "searchPlaceholder": "e.g. SPM-1405-0014",
+    "reset": "Clear filters",
+    "showing": "Showing {{shown}} of {{total}}"
+  },
+  "status": {
+    "PendingSale": "Pending sale",
+    "SaleExecuted": "Sale executed",
+    "PendingSettlement": "Pending settlement",
+    "Settled": "Settled",
+    "Delayed": "Delayed",
+    "Failed": "Failed",
+    "Reversed": "Reversed"
+  },
+  "badges": {
+    "overdue": "Overdue by {{days}} d"
+  },
+  "units": {
+    "rial": "IRR"
+  },
+  "state": {
+    "loading": "Loading the settlement queue…",
+    "error": "Could not load the settlement queue."
+  }
+}

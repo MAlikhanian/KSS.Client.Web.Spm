@@ -1,0 +1,50 @@
+{
+  "title": "External service health",
+  "toolbar": {
+    "description": "Connection state of every external system the portfolio flow depends on."
+  },
+  "actions": {
+    "refresh": "Re-check"
+  },
+  "notice": {
+    "title": "Integrations are not connected yet",
+    "body": "No adapter is configured for these external systems, so nothing is polled automatically. Every step below — placing the order, taking the payment, confirming the bank transfer, notifying the investor — is performed by an operator by hand and recorded in the system afterwards. Cards drawn with a dashed border are in that manual mode.",
+    "counter": "{{manual}} of {{total}} services are handled manually."
+  },
+  "error": {
+    "title": "Could not load service health"
+  },
+  "empty": {
+    "title": "No external services registered",
+    "description": "Nothing is being monitored yet. Services appear here once the SPM service registers them."
+  },
+  "card": {
+    "lastChecked": "Last checked",
+    "latency": "Latency",
+    "successRate": "Success rate (24h)",
+    "note": "Note",
+    "manualHint": "No adapter configured — an operator performs this step by hand."
+  },
+  "legend": {
+    "title": "What the states mean"
+  },
+  "services": {
+    "Oms": "OMS (order management)",
+    "PaymentGateway": "Payment gateway",
+    "Bank": "Bank",
+    "Sms": "SMS",
+    "Email": "Email"
+  },
+  "states": {
+    "Healthy": "Healthy",
+    "Degraded": "Degraded",
+    "Down": "Down",
+    "Manual": "Manual"
+  },
+  "stateHints": {
+    "Healthy": "The adapter responds inside its expected latency and error budget.",
+    "Degraded": "The adapter responds, but slowly or with elevated failures — expect delays.",
+    "Down": "The adapter cannot be reached; every step that depends on it is blocked.",
+    "Manual": "No adapter is configured. An operator performs this step by hand."
+  }
+}

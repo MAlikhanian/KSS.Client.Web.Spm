@@ -1,0 +1,67 @@
+{
+  "title": "Reconciliation",
+  "toolbar": {
+    "description": "Daily three-way match of internal records, OMS trades and bank statements, with every discrepancy it raised."
+  },
+  "error": "Could not load reconciliation data.",
+  "tiles": {
+    "summary": "{{investigating}} investigating · {{total}} detected"
+  },
+  "runs": {
+    "title": "Reconciliation runs",
+    "hint": "Click a run to filter the discrepancies below",
+    "selected": "Filtered to the run of {{date}}",
+    "clear": "Show all runs",
+    "empty": "No reconciliation run has been recorded yet.",
+    "columns": {
+      "runDate": "Run date",
+      "startedAt": "Started",
+      "completedAt": "Completed",
+      "internal": "Internal",
+      "oms": "OMS",
+      "bank": "Bank",
+      "matched": "Matched",
+      "discrepancies": "Discrepancies",
+      "status": "Status"
+    }
+  },
+  "runStatuses": {
+    "Running": "Running",
+    "Completed": "Completed",
+    "Failed": "Failed"
+  },
+  "types": {
+    "MissingInOms": "Missing in OMS",
+    "MissingInBank": "Missing in bank",
+    "AmountMismatch": "Amount mismatch",
+    "StatusMismatch": "Status mismatch"
+  },
+  "statuses": {
+    "Open": "Open",
+    "Investigating": "Investigating",
+    "Resolved": "Resolved",
+    "WrittenOff": "Written off"
+  },
+  "discrepancies": {
+    "title": "Discrepancies",
+    "showing": "{{shown}} of {{total}} rows",
+    "empty": "No discrepancy matches the current filters.",
+    "unassigned": "Unassigned",
+    "columns": {
+      "type": "Type",
+      "status": "Status",
+      "request": "Request",
+      "internalAmount": "Internal amount (IRR)",
+      "externalAmount": "External amount (IRR)",
+      "difference": "Difference (IRR)",
+      "externalRef": "External ref",
+      "assignedTo": "Assigned to",
+      "detectedAt": "Detected at"
+    }
+  },
+  "filters": {
+    "allTypes": "All types",
+    "allStatuses": "All statuses",
+    "clear": "Clear filters"
+  }
+}

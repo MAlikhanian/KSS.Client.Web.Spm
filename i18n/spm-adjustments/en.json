@@ -1,0 +1,68 @@
+{
+  "toolbar": {
+    "title": "Adjustments",
+    "description": "Manual ledger corrections raised against a reconciliation discrepancy. Each one needs two separate approvers before it is applied."
+  },
+  "tiles": {
+    "pendingFirst": "Pending first approval",
+    "pendingSecond": "Pending second approval",
+    "approved": "Approved",
+    "totalAdjusted": "Total adjusted value",
+    "totalAdjustedHint": "{{amount}} IRR, approved adjustments only"
+  },
+  "queue": {
+    "title": "Awaiting approval",
+    "description": "Adjustments that still need an approval step. Approving is disabled until the SPM service is connected.",
+    "empty": "Nothing is waiting for approval."
+  },
+  "history": {
+    "title": "Adjustment history",
+    "empty": "No adjustment has been recorded yet.",
+    "emptyFiltered": "No adjustment matches the current filters."
+  },
+  "filters": {
+    "searchPlaceholder": "Search reason, requester or approver",
+    "status": "Status",
+    "all": "All statuses",
+    "clear": "Clear filters"
+  },
+  "table": {
+    "amount": "Amount (IRR)",
+    "reason": "Reason",
+    "discrepancy": "Linked discrepancy",
+    "requestedBy": "Requested by",
+    "requestedAt": "Requested at",
+    "firstApprover": "First approver",
+    "secondApprover": "Second approver",
+    "approval": "Approval",
+    "status": "Status",
+    "actions": "Actions",
+    "notYet": "Not yet",
+    "noAction": "No action"
+  },
+  "steps": {
+    "first": "Step 1 - first approval",
+    "second": "Step 2 - second approval"
+  },
+  "status": {
+    "PendingFirst": "Pending first approval",
+    "PendingSecond": "Pending second approval",
+    "Approved": "Approved",
+    "Rejected": "Rejected"
+  },
+  "discrepancyType": {
+    "MissingInOms": "Missing in OMS",
+    "MissingInBank": "Missing in bank",
+    "AmountMismatch": "Amount mismatch",
+    "StatusMismatch": "Status mismatch"
+  },
+  "actions": {
+    "approve": "Approve",
+    "reject": "Reject",
+    "new": "New adjustment",
+    "readOnlyTooltip": "Read-only until the SPM service is connected"
+  },
+  "state": {
+    "error": "Could not load adjustments."
+  }
+}
