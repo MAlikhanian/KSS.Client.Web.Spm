@@ -38,18 +38,51 @@ export function formatUnits(value: number | null | undefined): string {
 }
 
 /**
- * Fixed UTC formatting. Deliberately not locale/timezone dependent — a value
- * that renders differently on the server and in the browser causes a hydration
- * mismatch, and every timestamp in this domain is stored UTC.
+ * Dates render in the CALENDAR OF THE ACTIVE LANGUAGE: Jalali (شمسی) under fa,
+ * Gregorian under en. Every SPM screen — console and investor portal — goes
+ * through here, so the two can never disagree about what day it is.
+ *
+ * WHY THIS CHANGED, and why the original reasoning no longer applies:
+ * these functions used to return `iso.slice(0, 10)` — a fixed Gregorian string,
+ * chosen because a value that renders differently on the server and in the
+ * browser causes a hydration mismatch. That was correct then. It is not a risk
+ * now: every screen in this zone is a client component that loads its data in
+ * `useEffect`, so no date is rendered during the server pass at all. The cost
+ * was a Persian UI showing 2026-08-21 to a Persian user.
+ *
+ * `toLocaleDateString` under `fa-IR` gives the Persian calendar with Persian
+ * digits — ۱۴۰۵/۰۵/۳۰ — which is what the client's own panels show.
  */
+
+import i18n from 'i18next';
+
+/** Map the active i18n language onto a full locale tag. */
+function activeLocale(): string {
+  const lang = (i18n?.language ?? 'fa').toLowerCase();
+  return lang.startsWith('fa') ? 'fa-IR' : 'en-US';
+}
+
 export function formatDate(iso: string | null | undefined): string {
   if (!iso) return '—';
-  return iso.slice(0, 10);
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return '—';
+  return d.toLocaleDateString(activeLocale(), {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  });
 }
 
 export function formatDateTime(iso: string | null | undefined): string {
   if (!iso) return '—';
-  return `${iso.slice(0, 10)} ${iso.slice(11, 16)}`;
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return '—';
+  const time = d.toLocaleTimeString(activeLocale(), {
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  });
+  return `${formatDate(iso)} ${time}`;
 }
 
 /** Whole hours between two ISO instants; negative means overdue. */

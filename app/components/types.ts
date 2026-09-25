@@ -99,7 +99,84 @@ export interface Instrument {
   instrumentType: string;
   isActive: boolean;
   navPerUnit: number;
+  /**
+   * NAV at which units are issued — صدور. Sits beside `navPerUnit` rather than
+   * replacing it: `navPerUnit` is the fund's single published unit value, while
+   * these two are the prices an investor actually transacts at, and the spread
+   * between them is the fund's issuance margin. `Holding` already carries the
+   * same pair for a position; this is the catalogue-level twin.
+   */
+  navIssue: number;
+  /** NAV at which units are redeemed — ابطال. */
+  navRedeem: number;
   rule: InstrumentRule;
+  /** Fund-detail content — everything below is descriptive, not transactional. */
+  profile: InstrumentProfile;
+}
+
+/**
+ * The prose and figures the investor-facing fund page renders, kept in its own
+ * interface so the transactional half of `Instrument` stays readable.
+ *
+ * Every human-readable field is a fa/en pair, matching `nameFa`/`nameEn`: this
+ * is marketing and regulatory copy, and it has to translate. Percentages are
+ * stored as plain numbers (33.2 means 33.2%), never as pre-formatted strings —
+ * formatting is the page's job.
+ */
+export interface InstrumentProfile {
+  /** سود موثر سالانه — effective annual yield, e.g. 33.2 for 33.2%. */
+  annualYieldPct: number;
+  /** بازدهی یکماه گذشته — trailing one-month return. */
+  monthlyReturnPct: number;
+  /** بازدهی یکسال گذشته — trailing one-year return. */
+  yearlyReturnPct: number;
+  /** تاریخ تقسیم سود — when profit is distributed, as prose ('۳۱ هرماه'). */
+  profitDistributionFa: string;
+  profitDistributionEn: string;
+  /** The hero line. Carries the yield inline, so it is copy, not a template. */
+  headlineFa: string;
+  headlineEn: string;
+  aboutFa: string;
+  aboutEn: string;
+  /** شماره ثبت نزد سازمان بورس. */
+  registrationNumber: string;
+  /** ضامن نقدشوندگی. */
+  guarantorNameFa: string;
+  guarantorNameEn: string;
+  /** مدیر صندوق. */
+  managerNameFa: string;
+  managerNameEn: string;
+  /** متولی. */
+  custodianNameFa: string;
+  custodianNameEn: string;
+  /** روزهای کاری صندوق. */
+  workingDaysFa: string;
+  workingDaysEn: string;
+  /** The fund's own public site. Empty string when it has none. */
+  websiteUrl: string;
+  /**
+   * An optional promoted feature — «برداشت آنی» on the reference page. Renders
+   * nothing when `titleFa` is empty, so a fund without one costs no layout.
+   */
+  highlight: InstrumentHighlight;
+  faq: InstrumentFaq[];
+}
+
+export interface InstrumentHighlight {
+  titleFa: string;
+  titleEn: string;
+  bodyFa: string;
+  bodyEn: string;
+  /** The pulled-out callout line beneath the body. */
+  calloutFa: string;
+  calloutEn: string;
+}
+
+export interface InstrumentFaq {
+  questionFa: string;
+  questionEn: string;
+  answerFa: string;
+  answerEn: string;
 }
 
 export interface InstrumentRule {
@@ -144,6 +221,35 @@ export interface InvestmentRequest {
   needsManualReview: boolean;
   /** Server-derived de-duplication token. Never generated in the browser. */
   idempotencyKey: string;
+}
+
+/**
+ * What one investor holds in one fund, valued at the current NAV.
+ *
+ * `InvestorAccount` carries only a portfolio total; the investor portal needs
+ * the per-fund breakdown to render fund cards and the composition chart. The
+ * real service derives this from the ledger rather than storing it.
+ */
+export interface Holding {
+  investorAccountId: Guid;
+  instrumentId: Guid;
+  units: number;
+  /** units × navRedeem, in rials. */
+  value: number;
+  /** NAV at which units are issued — صدور. */
+  navIssue: number;
+  /** NAV at which units are redeemed — ابطال. */
+  navRedeem: number;
+  asOf: IsoDateTime;
+}
+
+/** A profit payment made to an investor for one fund — تقسیم سود. */
+export interface ProfitDistribution {
+  id: Guid;
+  investorAccountId: Guid;
+  instrumentId: Guid;
+  amount: number;
+  distributedAt: IsoDateTime;
 }
 
 export interface PaymentTransaction {

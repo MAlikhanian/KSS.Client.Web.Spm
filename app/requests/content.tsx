@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
-import { ArrowUpRight, Inbox, Search, TriangleAlert, X } from 'lucide-react';
+import { ArrowUpRight, Inbox, Plus, Search, TriangleAlert, X } from 'lucide-react';
 import { Alert, AlertDescription, AlertIcon, AlertTitle } from '@/components/ui/alert';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -209,6 +209,13 @@ export function RequestsContent() {
         defaultValue:
           'Every deposit and withdrawal request, with its position in the settlement pipeline.',
       })}
+      actions={
+        <Button asChild>
+          <Link href="/requests/create">
+            <Plus /> {t('actions.new', { defaultValue: 'New request' })}
+          </Link>
+        </Button>
+      }
     >
       {/* summary tiles */}
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 lg:gap-7.5">

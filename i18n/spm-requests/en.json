@@ -60,5 +60,172 @@
   },
   "error": {
     "title": "Could not load requests"
+  },
+  "actions": {
+    "new": "New request"
+  },
+  "create": {
+    "title": "Register a capital deposit or withdrawal request",
+    "description": "Register a deposit or withdrawal on an investor's behalf.",
+    "formTitle": "Request details",
+    "type": "Request type",
+    "typeHint": "Deposit brings capital in and buys units; withdrawal sells units and pays capital out.",
+    "investor": "Investor",
+    "investorPlaceholder": "Select an investor…",
+    "instrument": "Instrument",
+    "instrumentPlaceholder": "Select an instrument…",
+    "amount": "Amount (IRR)",
+    "amountPlaceholder": "e.g. 500,000,000",
+    "units": "Units",
+    "unitsPlaceholder": "Required for a withdrawal",
+    "unitsHint": "For a withdrawal, the number of units to be sold.",
+    "submit": "Register request",
+    "submitting": "Registering…",
+    "cancel": "Cancel",
+    "rules": "Instrument rules",
+    "rulesMin": "Minimum amount",
+    "rulesMax": "Maximum amount",
+    "rulesCutOff": "Cut-off time",
+    "rulesSettlement": "Settlement",
+    "rulesSettlementValue": "T+{{days}}",
+    "successTitle": "Request registered",
+    "successBody": "Request {{number}} entered the queue at status Submitted.",
+    "duplicateTitle": "This request already exists",
+    "duplicateBody": "An identical request already exists as {{number}}; nothing new was created.",
+    "validation": {
+      "investor": "Select an investor.",
+      "instrument": "Select an instrument.",
+      "amount": "Amount must be greater than zero.",
+      "amountMin": "Amount is below this instrument's minimum.",
+      "amountMax": "Amount is above this instrument's maximum.",
+      "units": "Units are required for a withdrawal.",
+      "unitsMin": "Units are below this instrument's minimum.",
+      "unitsHeld": "You hold only {{held}} units of this fund."
+    }
+  },
+  "advance": {
+    "label": "Change status",
+    "hint": "Next status in the settlement cycle",
+    "apply": "Apply status",
+    "done": "Status changed to {{status}}."
+  },
+  "portal": {
+    "title": "Investor portal",
+    "description": "Your holdings, requests and account movements at a glance.",
+    "investor": "Investor",
+    "investorHint": "In the finished platform this comes from authentication.",
+    "nav": {
+      "overview": "Overview",
+      "instruments": "Funds",
+      "newRequest": "New request",
+      "myRequests": "My requests"
+    },
+    "total": {
+      "title": "Total assets including profit",
+      "asOf": "as at {{date}}",
+      "units": "Total units"
+    },
+    "composition": {
+      "title": "Asset composition",
+      "empty": "No holdings to show.",
+      "FixedIncomeEtf": "Fixed income",
+      "CommodityFund": "Commodity based",
+      "EquityMixedFund": "Equity & mixed"
+    },
+    "funds": {
+      "title": "Holdings by fund",
+      "navIssue": "Issue NAV",
+      "navRedeem": "Redeem NAV",
+      "units": "Units",
+      "empty": "You hold no units in any fund."
+    },
+    "fund": {
+      "title": "Fund",
+      "description": "Fund profile, pricing and rules.",
+      "back": "All funds",
+      "loading": "Loading fund…",
+      "error": "Could not load the fund",
+      "notFound": "No such fund",
+      "notFoundBody": "This fund is not in the catalogue.",
+      "closed": "Closed to new business",
+      "currency": "IRR",
+      "annualYield": "Effective annual yield",
+      "annualYieldHint": "The annualised rate the fund is currently returning. Not a guarantee of future performance.",
+      "monthlyReturn": "Past one-month return",
+      "yearlyReturn": "Past one-year return",
+      "profitDistribution": "Profit distribution",
+      "capitalTitle": "Capital management",
+      "unitPrice": "Approximate price per unit",
+      "invest": "Invest",
+      "withdraw": "Withdraw",
+      "about": "About the fund",
+      "registrationNumber": "Registration number",
+      "guarantor": "Liquidity guarantor",
+      "manager": "Fund manager",
+      "custodian": "Custodian",
+      "workingDays": "Working days",
+      "website": "Fund website",
+      "rules": "Fund rules",
+      "faq": "Frequently asked"
+    },
+    "issuance": {
+      "title": "Issue units",
+      "titleFor": "Issue units — {{fund}}",
+      "description": "Buy units in this fund.",
+      "formTitle": "Request to issue units of {{fund}}",
+      "backToFund": "Back to fund",
+      "notice": "Requests registered before {{cutOff}} on a business day are processed the same day; later ones roll to the next business day. Working days: {{days}}.",
+      "closed": "This fund is closed to new business — units cannot be issued.",
+      "minAmount": "Minimum {{amount}} {{currency}}",
+      "approxUnits": "Approximate units",
+      "submit": "Confirm and continue",
+      "stepsTitle": "What happens next",
+      "paymentNote": "Online payment is not enabled yet. After you submit, the request waits at “Awaiting payment” and payment instructions are arranged with you directly.",
+      "step": {
+        "Submitted": "Your request is recorded.",
+        "Validated": "The request details are checked and approved.",
+        "AwaitingPayment": "Waiting for the investment amount to be paid.",
+        "Paid": "Your payment is recorded and confirmed.",
+        "OrderPlaced": "The issuance order is sent to the fund.",
+        "Filled": "Units are allocated at the next business day’s NAV.",
+        "Settled": "The units are added to your holdings and the request closes."
+      }
+    },
+    "history": {
+      "title": "Asset history",
+      "empty": "No history to show.",
+      "balance": "Balance"
+    },
+    "requests": {
+      "title": "Request report",
+      "type": "Type",
+      "created": "Created",
+      "fund": "Fund",
+      "units": "Approx. units",
+      "amount": "Amount (IRR)",
+      "status": "Status",
+      "empty": "No results found."
+    },
+    "pendingIssue": {
+      "title": "Pending issuance",
+      "count": "Estimated count",
+      "amount": "Amount to deposit"
+    },
+    "pendingRedeem": {
+      "title": "Pending redemption",
+      "units": "Total units",
+      "count": "Pending count"
+    },
+    "profit": {
+      "title": "Profit distribution",
+      "fund": "Fund",
+      "date": "Date",
+      "amount": "Amount",
+      "empty": "No results found."
+    },
+    "activity": {
+      "title": "Recent activity",
+      "empty": "No activity recorded."
+    }
   }
 }

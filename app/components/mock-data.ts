@@ -17,7 +17,9 @@ import type {
   AuditEntry,
   Discrepancy,
   ExternalServiceHealth,
+  Holding,
   Instrument,
+  InstrumentFaq,
   InvestmentOrder,
   InvestmentRequest,
   InvestorAccount,
@@ -25,6 +27,7 @@ import type {
   ManualAdjustment,
   OrderEvent,
   PaymentTransaction,
+  ProfitDistribution,
   ReconciliationRun,
   ResolutionCase,
   Settlement,
@@ -37,6 +40,67 @@ const g = (n: string) => `01991f2a-${n}-7000-8000-000000000001`;
 
 /* ── instruments ──────────────────────────────────────────────────────────── */
 
+/**
+ * The questions every fund answers the same way, with the fund's own name woven
+ * in. A helper rather than five copy-pasted arrays — it is a pure function of
+ * its arguments, so the data stays as deterministic as a literal would be, and
+ * a wording fix lands on all five funds at once instead of four of them.
+ *
+ * Fund-specific questions are appended at each call site.
+ */
+function commonFaq(nameFa: string, nameEn: string): InstrumentFaq[] {
+  return [
+    {
+      questionFa: 'منظور از NAV صدور چیست؟',
+      questionEn: 'What is the issue NAV?',
+      answerFa:
+        'NAV صدور قیمتی است که شما برای خرید هر واحد سرمایه‌گذاری می‌پردازید. این قیمت از ارزش خالص دارایی‌های صندوق به‌علاوه‌ی کارمزد صدور به دست می‌آید و روزانه محاسبه می‌شود.',
+      answerEn:
+        'The issue NAV is the price you pay for each unit you buy. It is the fund’s net asset value plus the issuance fee, and it is recalculated every business day.',
+    },
+    {
+      questionFa: 'منظور از NAV ابطال چیست؟',
+      questionEn: 'What is the redemption NAV?',
+      answerFa:
+        'NAV ابطال قیمتی است که هنگام برداشت، بابت هر واحد به شما پرداخت می‌شود. اختلاف آن با NAV صدور همان کارمزد صدور صندوق است.',
+      answerEn:
+        'The redemption NAV is what you are paid per unit when you withdraw. The gap between it and the issue NAV is the fund’s issuance fee.',
+    },
+    {
+      questionFa: 'از کدام بخش می‌توان سرمایه‌گذاری و برداشت انجام داد؟',
+      questionEn: 'Where do I invest or withdraw?',
+      answerFa:
+        'از همین صفحه، با دکمه‌های «سرمایه‌گذاری» و «برداشت»، درخواست شما با صندوق انتخاب‌شده باز می‌شود و تنها کافی است مبلغ یا تعداد واحد را وارد کنید.',
+      answerEn:
+        'From this page — the “Invest” and “Withdraw” buttons open a new request with this fund already selected, so you only enter the amount or the number of units.',
+    },
+    {
+      questionFa: `حداقل مبلغ برای شروع سرمایه‌گذاری در ${nameFa} چقدر است؟`,
+      questionEn: `What is the minimum to start investing in ${nameEn}?`,
+      answerFa:
+        'حداقل و حداکثر مبلغ هر درخواست در بخش «قوانین صندوق» همین صفحه آمده است و همان مقدار در فرم ثبت درخواست اعتبارسنجی می‌شود.',
+      answerEn:
+        'The minimum and maximum per request are shown in the “Fund rules” section of this page, and the request form validates against exactly those figures.',
+    },
+    {
+      questionFa: 'درخواست من چه زمانی پردازش می‌شود؟',
+      questionEn: 'When is my request processed?',
+      answerFa:
+        'درخواست‌های ثبت‌شده پیش از ساعت مقرر (cut-off) همان روز کاری پردازش می‌شوند و درخواست‌های پس از آن به روز کاری بعد منتقل می‌شود. زمان تسویه به‌صورت T+n در همین صفحه آمده است.',
+      answerEn:
+        'Requests submitted before the cut-off time are processed the same business day; later ones roll to the next. The settlement window is shown as T+n on this page.',
+    },
+    {
+      questionFa: 'آیا امکان ضرر بر روی اصل سرمایه وجود دارد؟',
+      questionEn: 'Can I lose my principal?',
+      answerFa:
+        'در صندوق‌های درآمد ثابت، ترکیب دارایی به‌گونه‌ای است که نوسان اصل سرمایه بسیار محدود باشد؛ اما هیچ بازدهی تضمین‌شده نیست و بازدهی گذشته تضمینی برای آینده نیست. در صندوق‌های کالایی و سهامی نوسان اصل سرمایه کاملاً محتمل است.',
+      answerEn:
+        'Fixed-income funds are built so that principal moves very little, but no return is guaranteed and past performance does not guarantee future results. In commodity and equity funds the principal can and does move.',
+    },
+  ];
+}
+
 export const MOCK_INSTRUMENTS: Instrument[] = [
   {
     id: g('0001'),
@@ -46,6 +110,42 @@ export const MOCK_INSTRUMENTS: Instrument[] = [
     instrumentType: 'FixedIncomeEtf',
     isActive: true,
     navPerUnit: 10_450,
+    navIssue: 10_512,
+    navRedeem: 10_450,
+    profile: {
+      annualYieldPct: 31.5,
+      monthlyReturnPct: 2.1,
+      yearlyReturnPct: 28.4,
+      profitDistributionFa: '۲۵ هرماه',
+      profitDistributionEn: '25th of each month',
+      headlineFa: 'افزایش سود سالیانه تا ۳۱.۵٪ با فعال‌سازی گزینه صدور از محل سود',
+      headlineEn: 'Annual yield up to 31.5% with profit-reinvestment issuance enabled',
+      aboutFa:
+        'صندوق درآمد ثابت سپاس با بیش از ده سال سابقه، یکی از پرحجم‌ترین صندوق‌های درآمد ثابت مجموعه است. سود این صندوق به‌صورت روزشمار محاسبه و در دوره‌های ماهانه به‌صورت سود نقدی به دارندگان واحدهای سرمایه‌گذاری پرداخت می‌شود. ارزش اسمی هر واحد ۱۰٬۰۰۰ ریال است و سرمایه‌گذاری حتی با خرید یک واحد نیز امکان‌پذیر است.',
+      aboutEn:
+        'Sepas is one of the largest fixed-income funds in the family, with over ten years of history. Profit accrues daily and is paid out monthly in cash to unit holders. The nominal value of a unit is 10,000 IRR, and an investment can begin with a single unit.',
+      registrationNumber: '11726',
+      guarantorNameFa: 'بانک توسعه پارس',
+      guarantorNameEn: 'Pars Development Bank',
+      managerNameFa: 'تأمین سرمایه کاسپین',
+      managerNameEn: 'Caspian Investment Banking',
+      custodianNameFa: 'مؤسسه حسابرسی آگاه‌نگر',
+      custodianNameEn: 'Agah Negar Audit Institute',
+      workingDaysFa: 'شنبه تا چهارشنبه (به جز ایام تعطیل رسمی)',
+      workingDaysEn: 'Saturday to Wednesday, excluding public holidays',
+      websiteUrl: 'https://example.ir/funds/sepas',
+      highlight: {
+        titleFa: 'برداشت آنی',
+        titleEn: 'Instant withdrawal',
+        bodyFa:
+          'در یک سرمایه‌گذاری هوشمندانه، دسترسی سریع به پول (نقدشوندگی) به اندازه‌ی سودآوری اهمیت دارد. با ثبت درخواست «ابطال آنی»، مبلغ درخواستی بدون معطلی به حساب بانکی ثبت‌شده‌ی شما واریز می‌شود.',
+        bodyEn:
+          'In a well-made investment, getting to your money quickly matters as much as the return. With an instant-redemption request, the amount is transferred to your registered bank account without waiting.',
+        calloutFa: 'واریز در کمتر از ۱۰ دقیقه',
+        calloutEn: 'Paid out in under 10 minutes',
+      },
+      faq: commonFaq('صندوق درآمد ثابت سپاس', 'Sepas Fixed Income ETF'),
+    },
     rule: {
       minAmount: 1_000_000,
       maxAmount: 5_000_000_000,
@@ -64,6 +164,42 @@ export const MOCK_INSTRUMENTS: Instrument[] = [
     instrumentType: 'FixedIncomeEtf',
     isActive: true,
     navPerUnit: 12_180,
+    navIssue: 12_253,
+    navRedeem: 12_180,
+    profile: {
+      annualYieldPct: 33.2,
+      monthlyReturnPct: 2.24,
+      yearlyReturnPct: 29,
+      profitDistributionFa: '۳۱ هرماه',
+      profitDistributionEn: '31st of each month',
+      headlineFa: 'افزایش سود سالیانه تا ۳۳.۲٪ با فعال‌سازی گزینه صدور از محل سود',
+      headlineEn: 'Annual yield up to 33.2% with profit-reinvestment issuance enabled',
+      aboutFa:
+        'صندوق درآمد ثابت سپینا با بیش از پانزده سال سابقه، هم‌اکنون به‌عنوان یکی از بزرگ‌ترین صندوق‌های درآمد ثابت شناخته می‌شود و مدیریت دارایی‌هایی بالغ بر ۵۷۰ هزار میلیارد ریال را بر عهده دارد. سود این صندوق روزشمار محاسبه و ماهانه پرداخت می‌شود و ارزش اسمی هر واحد ۱٬۰۰۰٬۰۰۰ ریال است.',
+      aboutEn:
+        'Sepina, with more than fifteen years of history, is among the largest fixed-income funds in the market and manages assets of over 570,000 billion IRR. Profit accrues daily and is paid monthly; the nominal value of a unit is 1,000,000 IRR.',
+      registrationNumber: '11384',
+      guarantorNameFa: 'بانک توسعه پارس',
+      guarantorNameEn: 'Pars Development Bank',
+      managerNameFa: 'تأمین سرمایه تمدن نو',
+      managerNameEn: 'Tamaddon No Investment Banking',
+      custodianNameFa: 'مؤسسه حسابرسی آگاه‌نگر',
+      custodianNameEn: 'Agah Negar Audit Institute',
+      workingDaysFa: 'شنبه تا پنجشنبه (به جز ایام تعطیل رسمی)',
+      workingDaysEn: 'Saturday to Thursday, excluding public holidays',
+      websiteUrl: 'https://example.ir/funds/sepina',
+      highlight: {
+        titleFa: 'برداشت آنی',
+        titleEn: 'Instant withdrawal',
+        bodyFa:
+          'با ثبت درخواست «ابطال آنی»، مبلغ درخواستی در کمتر از ۱۰ دقیقه به حساب بانکی‌تان واریز می‌شود تا تجربه‌ی یک سرمایه‌گذاری مطمئن با سود مستمر و دسترسی همیشگی برای شما فراهم شود.',
+        bodyEn:
+          'With an instant-redemption request the amount reaches your bank account in under ten minutes — steady income without giving up access to your money.',
+        calloutFa: 'واریز در کمتر از ۱۰ دقیقه',
+        calloutEn: 'Paid out in under 10 minutes',
+      },
+      faq: commonFaq('صندوق درآمد ثابت سپینا', 'Sepina Fixed Income ETF'),
+    },
     rule: {
       minAmount: 5_000_000,
       maxAmount: 20_000_000_000,
@@ -82,6 +218,44 @@ export const MOCK_INSTRUMENTS: Instrument[] = [
     instrumentType: 'FixedIncomeEtf',
     isActive: false,
     navPerUnit: 9_900,
+    navIssue: 9_959,
+    navRedeem: 9_900,
+    // The closed fund, and the only one with an EMPTY highlight — it is the
+    // fixture that proves the highlight band renders nothing rather than an
+    // empty box. It also has no holdings and no orders (see MOCK_HOLDINGS), so
+    // it is the row that exercises every empty state on the detail page at once.
+    profile: {
+      annualYieldPct: 27.8,
+      monthlyReturnPct: 1.9,
+      yearlyReturnPct: 26.1,
+      profitDistributionFa: '۱۵ هرماه',
+      profitDistributionEn: '15th of each month',
+      headlineFa: 'این صندوق برای پذیره‌نویسی جدید بسته است',
+      headlineEn: 'This fund is closed to new subscriptions',
+      aboutFa:
+        'صندوق درآمد ثابت سپهر از مردادماه ۱۴۰۵ برای صدور واحد جدید بسته شده است و صدور و ابطال از طریق این درگاه در دسترس نیست. برای وضعیت واحدهای موجود خود با واحد پشتیبانی تماس بگیرید.',
+      aboutEn:
+        'Sepehr has been closed to new unit issuance since August 2026, and issuance and redemption are not available through this portal. Contact support about the status of units you already hold.',
+      registrationNumber: '10952',
+      guarantorNameFa: 'بانک توسعه پارس',
+      guarantorNameEn: 'Pars Development Bank',
+      managerNameFa: 'تأمین سرمایه کاسپین',
+      managerNameEn: 'Caspian Investment Banking',
+      custodianNameFa: 'مؤسسه حسابرسی آگاه‌نگر',
+      custodianNameEn: 'Agah Negar Audit Institute',
+      workingDaysFa: 'شنبه تا چهارشنبه (به جز ایام تعطیل رسمی)',
+      workingDaysEn: 'Saturday to Wednesday, excluding public holidays',
+      websiteUrl: '',
+      highlight: {
+        titleFa: '',
+        titleEn: '',
+        bodyFa: '',
+        bodyEn: '',
+        calloutFa: '',
+        calloutEn: '',
+      },
+      faq: commonFaq('صندوق درآمد ثابت سپهر', 'Sepehr Fixed Income ETF'),
+    },
     rule: {
       minAmount: 1_000_000,
       maxAmount: 1_000_000_000,
@@ -90,6 +264,114 @@ export const MOCK_INSTRUMENTS: Instrument[] = [
       settlementDays: 1,
       effectiveFrom: '2025-06-01T00:00:00.000Z',
       effectiveTo: '2026-07-31T00:00:00.000Z',
+    },
+  },
+  {
+    id: g('0004'),
+    symbol: 'سپیدار',
+    nameFa: 'صندوق کالایی سپیدار',
+    nameEn: 'Sepidar Commodity Fund',
+    instrumentType: 'CommodityFund',
+    isActive: true,
+    navPerUnit: 28_640,
+    navIssue: 28_812,
+    navRedeem: 28_640,
+    profile: {
+      annualYieldPct: 24,
+      monthlyReturnPct: 3.6,
+      yearlyReturnPct: 41.7,
+      profitDistributionFa: 'بدون تقسیم سود دوره‌ای',
+      profitDistributionEn: 'No periodic distribution',
+      headlineFa: 'پوشش نوسان قیمت کالا، بدون نگهداری فیزیکی',
+      headlineEn: 'Commodity exposure without holding the physical asset',
+      aboutFa:
+        'صندوق کالایی سپیدار دارایی خود را عمدتاً در گواهی سپرده‌ی کالایی و اوراق مبتنی بر کالا سرمایه‌گذاری می‌کند. این صندوق سود دوره‌ای پرداخت نمی‌کند؛ بازدهی سرمایه‌گذار از تغییر ارزش هر واحد به دست می‌آید و بنابراین نوسان اصل سرمایه در آن طبیعی است.',
+      aboutEn:
+        'Sepidar invests mainly in commodity deposit certificates and commodity-backed securities. It pays no periodic profit — the investor’s return comes from the change in unit value, so movement in the principal is normal and expected.',
+      registrationNumber: '11890',
+      guarantorNameFa: 'بانک توسعه پارس',
+      guarantorNameEn: 'Pars Development Bank',
+      managerNameFa: 'تأمین سرمایه کاسپین',
+      managerNameEn: 'Caspian Investment Banking',
+      custodianNameFa: 'مؤسسه حسابرسی رهنمون',
+      custodianNameEn: 'Rahnemoon Audit Institute',
+      workingDaysFa: 'شنبه تا چهارشنبه (به جز ایام تعطیل رسمی)',
+      workingDaysEn: 'Saturday to Wednesday, excluding public holidays',
+      websiteUrl: 'https://example.ir/funds/sepidar',
+      highlight: {
+        titleFa: 'بدون انبارداری و حمل',
+        titleEn: 'No storage, no delivery',
+        bodyFa:
+          'سرمایه‌گذاری در کالا بدون دغدغه‌ی نگهداری فیزیکی، بیمه و حمل. هر واحد صندوق نماینده‌ی سهمی از سبد کالایی است و نقدشوندگی آن از طریق همین سامانه انجام می‌شود.',
+        bodyEn:
+          'Commodity exposure without the storage, insurance and transport that owning the physical asset would bring. Each unit represents a share of the commodity basket, and it is liquidated through this same portal.',
+        calloutFa: 'نقدشوندگی در چارچوب تسویه‌ی T+۲',
+        calloutEn: 'Liquidated within the T+2 settlement window',
+      },
+      faq: commonFaq('صندوق کالایی سپیدار', 'Sepidar Commodity Fund'),
+    },
+    rule: {
+      minAmount: 10_000_000,
+      maxAmount: 10_000_000_000,
+      minUnits: 200,
+      cutOffTime: '12:00',
+      settlementDays: 2,
+      effectiveFrom: '2026-02-01T00:00:00.000Z',
+      effectiveTo: null,
+    },
+  },
+  {
+    id: g('0005'),
+    symbol: 'سپند',
+    nameFa: 'صندوق سهامی و مختلط سپند',
+    nameEn: 'Sepand Equity & Mixed Fund',
+    instrumentType: 'EquityMixedFund',
+    isActive: true,
+    navPerUnit: 41_320,
+    navIssue: 41_568,
+    navRedeem: 41_320,
+    // The only fund with a NEGATIVE trailing return. Deliberate: it is the
+    // fixture for the down-tone percentage path, which no other row exercises.
+    profile: {
+      annualYieldPct: 22.5,
+      monthlyReturnPct: -1.4,
+      yearlyReturnPct: 52.3,
+      profitDistributionFa: 'بدون تقسیم سود دوره‌ای',
+      profitDistributionEn: 'No periodic distribution',
+      headlineFa: 'بازدهی یکسال گذشته ۵۲.۳٪ — با پذیرش نوسان کوتاه‌مدت',
+      headlineEn: 'Up 52.3% over the past year — with short-term volatility accepted',
+      aboutFa:
+        'صندوق سهامی و مختلط سپند بخش عمده‌ی دارایی خود را در سهام شرکت‌های پذیرفته‌شده در بورس و بخشی را در اوراق با درآمد ثابت نگهداری می‌کند. این صندوق برای سرمایه‌گذاری میان‌مدت و بلندمدت طراحی شده و نوسان کوتاه‌مدت ارزش هر واحد در آن کاملاً محتمل است.',
+      aboutEn:
+        'Sepand holds most of its assets in listed equities and the remainder in fixed-income securities. It is built for a medium- to long-term horizon, and short-term movement in unit value is entirely expected.',
+      registrationNumber: '12014',
+      guarantorNameFa: '—',
+      guarantorNameEn: '—',
+      managerNameFa: 'تأمین سرمایه تمدن نو',
+      managerNameEn: 'Tamaddon No Investment Banking',
+      custodianNameFa: 'مؤسسه حسابرسی رهنمون',
+      custodianNameEn: 'Rahnemoon Audit Institute',
+      workingDaysFa: 'شنبه تا چهارشنبه (به جز ایام تعطیل رسمی)',
+      workingDaysEn: 'Saturday to Wednesday, excluding public holidays',
+      websiteUrl: 'https://example.ir/funds/sepand',
+      highlight: {
+        titleFa: '',
+        titleEn: '',
+        bodyFa: '',
+        bodyEn: '',
+        calloutFa: '',
+        calloutEn: '',
+      },
+      faq: commonFaq('صندوق سهامی و مختلط سپند', 'Sepand Equity & Mixed Fund'),
+    },
+    rule: {
+      minAmount: 20_000_000,
+      maxAmount: 15_000_000_000,
+      minUnits: 100,
+      cutOffTime: '11:45',
+      settlementDays: 3,
+      effectiveFrom: '2026-04-01T00:00:00.000Z',
+      effectiveTo: null,
     },
   },
 ];
@@ -365,4 +647,41 @@ export const MOCK_HEALTH: ExternalServiceHealth[] = [
   { service: 'Bank', state: 'Manual', lastCheckedAt: '2026-08-21T05:00:00.000Z', latencyMs: null, successRate24h: null, note: 'Settlement transfers confirmed from an uploaded bank statement.' },
   { service: 'Sms', state: 'Manual', lastCheckedAt: '2026-08-21T05:00:00.000Z', latencyMs: null, successRate24h: null, note: 'No notification service exists in the platform yet.' },
   { service: 'Email', state: 'Manual', lastCheckedAt: '2026-08-21T05:00:00.000Z', latencyMs: null, successRate24h: null, note: 'No notification service exists in the platform yet.' },
+];
+
+/* ── holdings — the per-fund breakdown behind an account's portfolio total ─── */
+
+/**
+ * Kept consistent with `MOCK_ACCOUNTS.totalUnits` and `.balance`: the rows for
+ * one account sum to that account's totals, so the portal and the console can
+ * never disagree about what an investor owns.
+ */
+export const MOCK_HOLDINGS: Holding[] = [
+  // علی رضایی — 24,500 units / 256,025,000 rials
+  { investorAccountId: g('1001'), instrumentId: g('0001'), units: 14_500, value: 151_525_000, navIssue: 10_512, navRedeem: 10_450, asOf: MOCK_TODAY },
+  { investorAccountId: g('1001'), instrumentId: g('0004'), units: 3_000, value: 85_920_000, navIssue: 28_812, navRedeem: 28_640, asOf: MOCK_TODAY },
+  { investorAccountId: g('1001'), instrumentId: g('0005'), units: 7_000, value: 18_580_000, navIssue: 41_568, navRedeem: 41_320, asOf: MOCK_TODAY },
+
+  // مریم کاظمی — 61,200 units / 745,416,000 rials
+  { investorAccountId: g('1002'), instrumentId: g('0002'), units: 41_050, value: 499_989_000, navIssue: 12_253, navRedeem: 12_180, asOf: MOCK_TODAY },
+  { investorAccountId: g('1002'), instrumentId: g('0001'), units: 12_150, value: 126_967_500, navIssue: 10_512, navRedeem: 10_450, asOf: MOCK_TODAY },
+  { investorAccountId: g('1002'), instrumentId: g('0005'), units: 8_000, value: 118_459_500, navIssue: 41_568, navRedeem: 41_320, asOf: MOCK_TODAY },
+
+  // زهرا احمدی — 8,000 units / 83,600,000 rials
+  { investorAccountId: g('1004'), instrumentId: g('0001'), units: 8_000, value: 83_600_000, navIssue: 10_512, navRedeem: 10_450, asOf: MOCK_TODAY },
+
+  // رضا نوری — 1,500 units / 15,675,000 rials
+  { investorAccountId: g('1005'), instrumentId: g('0001'), units: 1_500, value: 15_675_000, navIssue: 10_512, navRedeem: 10_450, asOf: MOCK_TODAY },
+
+  // حسین مرادی holds nothing — the empty-portfolio case must be renderable.
+];
+
+/* ── profit distributions — تقسیم سود ─────────────────────────────────────── */
+
+export const MOCK_PROFIT_DISTRIBUTIONS: ProfitDistribution[] = [
+  { id: g('d001'), investorAccountId: g('1001'), instrumentId: g('0001'), amount: 1_812_500, distributedAt: '2026-07-31T00:00:00.000Z' },
+  { id: g('d002'), investorAccountId: g('1001'), instrumentId: g('0001'), amount: 1_740_000, distributedAt: '2026-06-30T00:00:00.000Z' },
+  { id: g('d003'), investorAccountId: g('1002'), instrumentId: g('0002'), amount: 6_157_500, distributedAt: '2026-07-31T00:00:00.000Z' },
+  { id: g('d004'), investorAccountId: g('1002'), instrumentId: g('0001'), amount: 1_518_750, distributedAt: '2026-07-31T00:00:00.000Z' },
+  { id: g('d005'), investorAccountId: g('1004'), instrumentId: g('0001'), amount: 1_000_000, distributedAt: '2026-07-31T00:00:00.000Z' },
 ];

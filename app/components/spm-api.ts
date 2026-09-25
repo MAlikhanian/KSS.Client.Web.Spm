@@ -18,6 +18,7 @@
  * NOTE: no id is ever generated here. The backend supplies GUID v7 ids.
  */
 
+import { formatDate } from './format';
 import {
   MOCK_ACCOUNTS,
   MOCK_ADJUSTMENTS,
@@ -25,32 +26,47 @@ import {
   MOCK_CASES,
   MOCK_DISCREPANCIES,
   MOCK_HEALTH,
+  MOCK_HOLDINGS,
   MOCK_INSTRUMENTS,
   MOCK_LEDGER,
   MOCK_ORDERS,
   MOCK_ORDER_EVENTS,
   MOCK_PAYMENTS,
+  MOCK_PROFIT_DISTRIBUTIONS,
   MOCK_RECON_RUNS,
-  MOCK_REQUESTS,
   MOCK_SETTLEMENTS,
 } from './mock-data';
+import {
+  addRequest,
+  findRequest,
+  listRequests,
+  setRequestStatus,
+  type CreateRequestInput,
+  type CreateRequestResult,
+} from './mock-store';
 import type {
   AuditEntry,
   Discrepancy,
   ExternalServiceHealth,
   Guid,
+  Holding,
   Instrument,
   InvestmentOrder,
   InvestmentRequest,
   InvestorAccount,
   LedgerEntry,
   ManualAdjustment,
+  ProfitDistribution,
   ReconciliationRun,
   RequestDetail,
+  RequestStatus,
   RequestTimelineStage,
   ResolutionCase,
   Settlement,
 } from './types';
+
+/** Re-exported so screens never import from the mock layer directly. */
+export type { CreateRequestInput, CreateRequestResult };
 
 /** Simulated network latency so loading states are real during development. */
 const LATENCY_MS = 220;
@@ -81,12 +97,71 @@ export function getAccount(id: Guid): Promise<InvestorAccount | null> {
   return respond(MOCK_ACCOUNTS.find((a) => a.id === id) ?? null);
 }
 
+/* ── holdings & profit — the investor portal's own reads ──────────────────── */
+
+/** One investor's per-fund holdings. `GET /api/spm/accounts/{id}/holdings`. */
+export function getHoldings(accountId: Guid): Promise<Holding[]> {
+  return respond(MOCK_HOLDINGS.filter((h) => h.investorAccountId === accountId));
+}
+
+/** Profit paid to one investor — تقسیم سود, newest first. */
+export function getProfitDistributions(accountId: Guid): Promise<ProfitDistribution[]> {
+  return respond(
+    MOCK_PROFIT_DISTRIBUTIONS.filter((p) => p.investorAccountId === accountId).sort((a, b) =>
+      b.distributedAt.localeCompare(a.distributedAt),
+    ),
+  );
+}
+
+/** One investor's ledger, oldest first — drives the asset-history chart. */
+export function getLedgerForAccount(accountId: Guid): Promise<LedgerEntry[]> {
+  return respond(
+    MOCK_LEDGER.filter((l) => l.investorAccountId === accountId).sort((a, b) =>
+      a.valueDate.localeCompare(b.valueDate),
+    ),
+  );
+}
+
+/** One investor's requests, newest first. */
+export function getRequestsForAccount(accountId: Guid): Promise<InvestmentRequest[]> {
+  return respond(
+    listRequests()
+      .filter((r) => r.investorAccountId === accountId)
+      .sort((a, b) => b.submittedAt.localeCompare(a.submittedAt)),
+  );
+}
+
 /* ── requests ─────────────────────────────────────────────────────────────── */
 
 export function getRequests(): Promise<InvestmentRequest[]> {
   return respond(
-    [...MOCK_REQUESTS].sort((a, b) => b.submittedAt.localeCompare(a.submittedAt)),
+    [...listRequests()].sort((a, b) => b.submittedAt.localeCompare(a.submittedAt)),
   );
+}
+
+/**
+ * Registers a capital deposit or withdrawal request — proposal §7-1 and §7-2.
+ *
+ * On the real backend this is `POST /api/spm/requests`, and the response is the
+ * created row. Idempotent per §13-5: submitting the same request twice returns
+ * the first one and creates nothing, which `deduplicated` reports so the UI can
+ * say so rather than silently pretending it created something.
+ */
+export function createRequest(input: CreateRequestInput): Promise<CreateRequestResult> {
+  return respond(addRequest(input));
+}
+
+/**
+ * Advances a request through the settlement state machine — proposal §13-1.
+ * On the real backend this is `PATCH /api/spm/requests/{id}/status`, which
+ * validates the transition server-side and appends to the audit trail.
+ */
+export function advanceRequestStatus(
+  id: Guid,
+  status: RequestStatus,
+): Promise<InvestmentRequest | null> {
+  setRequestStatus(id, status);
+  return respond(findRequest(id) ?? null);
 }
 
 /**
@@ -94,7 +169,7 @@ export function getRequests(): Promise<InvestmentRequest[]> {
  * endpoint (`GET /api/spm/requests/{id}`) rather than five round-trips.
  */
 export function getRequestDetail(id: Guid): Promise<RequestDetail | null> {
-  const request = MOCK_REQUESTS.find((r) => r.id === id);
+  const request = findRequest(id);
   if (!request) return respond(null);
 
   const account = MOCK_ACCOUNTS.find((a) => a.id === request.investorAccountId)!;
@@ -200,7 +275,7 @@ function buildTimeline(
               : 'current',
       occurredAt: settlement?.paidAt ?? null,
       actor: 'bank',
-      detail: settlement ? `Due ${settlement.settlementDueDate.slice(0, 10)}` : 'Not scheduled',
+      detail: settlement ? `Due ${formatDate(settlement.settlementDueDate)}` : 'Not scheduled',
     },
     {
       key: 'complete',
