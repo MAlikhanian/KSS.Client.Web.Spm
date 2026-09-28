@@ -1,0 +1,55 @@
+{
+  "toolbar": {
+    "title": "Order tracking",
+    "description": "Every order sent to the OMS, grouped by where it is in its lifecycle."
+  },
+  "summary": {
+    "total": "Total orders",
+    "awaiting": "Awaiting OMS response",
+    "partial": "Partially filled",
+    "failed": "Failed"
+  },
+  "board": {
+    "title": "Order board"
+  },
+  "tabs": {
+    "all": "All",
+    "Pending": "Pending",
+    "AwaitingResponse": "Awaiting response",
+    "Partial": "Partially filled",
+    "Executed": "Executed",
+    "Failed": "Failed"
+  },
+  "filters": {
+    "searchPlaceholder": "Search OMS ref, request number or symbol"
+  },
+  "table": {
+    "omsRef": "OMS ref",
+    "requestNumber": "Request",
+    "symbol": "Symbol",
+    "side": "Side",
+    "quantity": "Quantity",
+    "filled": "Filled",
+    "price": "Price",
+    "status": "Status",
+    "placedAt": "Placed at",
+    "lastPolledAt": "Last polled",
+    "viewRequest": "View request",
+    "empty": "No orders match this filter."
+  },
+  "side": {
+    "Buy": "Buy",
+    "Sell": "Sell"
+  },
+  "status": {
+    "Pending": "Pending",
+    "AwaitingResponse": "Awaiting response",
+    "Partial": "Partially filled",
+    "Executed": "Executed",
+    "Cancelled": "Cancelled",
+    "Failed": "Failed"
+  },
+  "errors": {
+    "loadFailed": "Could not load orders."
+  }
+}

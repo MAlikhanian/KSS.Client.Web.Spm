@@ -1,0 +1,67 @@
+{
+  "title": "مغایرت‌گیری",
+  "toolbar": {
+    "description": "تطبیق روزانه سه‌طرفه میان سوابق داخلی، سامانه معاملات (OMS) و صورت‌حساب بانک، به همراه همه مغایرت‌های کشف‌شده."
+  },
+  "error": "بارگذاری اطلاعات مغایرت‌گیری ناموفق بود.",
+  "tiles": {
+    "summary": "{{investigating}} در حال بررسی · {{total}} مورد کشف‌شده"
+  },
+  "runs": {
+    "title": "اجراهای مغایرت‌گیری",
+    "hint": "برای فیلتر کردن مغایرت‌های پایین، روی یک اجرا کلیک کنید",
+    "selected": "فیلتر شده بر اساس اجرای {{date}}",
+    "clear": "نمایش همه اجراها",
+    "empty": "هنوز هیچ اجرای مغایرت‌گیری ثبت نشده است.",
+    "columns": {
+      "runDate": "تاریخ اجرا",
+      "startedAt": "شروع",
+      "completedAt": "پایان",
+      "internal": "سوابق داخلی",
+      "oms": "سامانه معاملات",
+      "bank": "بانک",
+      "matched": "تطبیق‌شده",
+      "discrepancies": "مغایرت",
+      "status": "وضعیت"
+    }
+  },
+  "runStatuses": {
+    "Running": "در حال اجرا",
+    "Completed": "تکمیل‌شده",
+    "Failed": "ناموفق"
+  },
+  "types": {
+    "MissingInOms": "نبود در سامانه معاملات",
+    "MissingInBank": "نبود در بانک",
+    "AmountMismatch": "اختلاف مبلغ",
+    "StatusMismatch": "اختلاف وضعیت"
+  },
+  "statuses": {
+    "Open": "باز",
+    "Investigating": "در حال بررسی",
+    "Resolved": "رفع‌شده",
+    "WrittenOff": "چشم‌پوشی‌شده"
+  },
+  "discrepancies": {
+    "title": "مغایرت‌ها",
+    "showing": "{{shown}} از {{total}} ردیف",
+    "empty": "هیچ مغایرتی با فیلترهای فعلی یافت نشد.",
+    "unassigned": "تخصیص‌نیافته",
+    "columns": {
+      "type": "نوع مغایرت",
+      "status": "وضعیت",
+      "request": "شماره درخواست",
+      "internalAmount": "مبلغ داخلی (ریال)",
+      "externalAmount": "مبلغ بیرونی (ریال)",
+      "difference": "اختلاف (ریال)",
+      "externalRef": "کد پیگیری بیرونی",
+      "assignedTo": "مسئول پیگیری",
+      "detectedAt": "زمان کشف"
+    }
+  },
+  "filters": {
+    "allTypes": "همه انواع",
+    "allStatuses": "همه وضعیت‌ها",
+    "clear": "حذف فیلترها"
+  }
+}

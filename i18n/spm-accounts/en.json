@@ -1,0 +1,46 @@
+{
+  "toolbar": {
+    "title": "Investor accounts",
+    "description": "Registry of investor accounts with their trading and payout readiness. A missing brokerage code blocks trading; a missing IBAN blocks withdrawals."
+  },
+  "tiles": {
+    "total": "Total accounts",
+    "totalHint": "Accounts on the registry",
+    "active": "Active",
+    "activeHint": "Allowed to transact",
+    "missingBrokerage": "Missing brokerage account",
+    "missingBrokerageHint": "Cannot place orders",
+    "missingIban": "Missing IBAN",
+    "missingIbanHint": "Cannot be paid out"
+  },
+  "filters": {
+    "title": "Search and filter",
+    "searchLabel": "Search",
+    "searchPlaceholder": "Name, national ID or brokerage code",
+    "issuesOnly": "Issues only",
+    "issuesOnlyHint": "No brokerage code, no IBAN, or inactive",
+    "clear": "Clear"
+  },
+  "table": {
+    "title": "Accounts",
+    "count": "Showing {{shown}} of {{total}}",
+    "name": "Full name",
+    "nationalId": "National ID",
+    "brokerageCode": "Brokerage account",
+    "iban": "IBAN",
+    "holder": "Account holder",
+    "openedAt": "Opened at",
+    "units": "Total units",
+    "balance": "Balance (IRR)",
+    "status": "Status",
+    "notProvisioned": "Not provisioned",
+    "ibanMissing": "Missing",
+    "active": "Active",
+    "inactive": "Inactive",
+    "empty": "No accounts match these filters",
+    "emptyHint": "Change the search term or turn off the issues filter."
+  },
+  "error": {
+    "title": "Could not load the account registry."
+  }
+}

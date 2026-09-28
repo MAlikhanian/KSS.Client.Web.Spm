@@ -1,0 +1,58 @@
+{
+  "title": "Account statement",
+  "toolbar": {
+    "description": "Append-only ledger for an investor account: every movement with its running balance. Read-only."
+  },
+  "actions": {
+    "print": "Print"
+  },
+  "filters": {
+    "title": "Statement scope",
+    "account": "Account",
+    "accountPlaceholder": "Select an account",
+    "flowType": "Flow type",
+    "direction": "Direction",
+    "search": "Search",
+    "searchPlaceholder": "Search the description…",
+    "all": "All"
+  },
+  "tiles": {
+    "totalUnits": "Total units held",
+    "balance": "Current balance",
+    "entries": "Number of entries"
+  },
+  "table": {
+    "valueDate": "Value date",
+    "description": "Description",
+    "flowType": "Flow type",
+    "direction": "Direction",
+    "amount": "Amount",
+    "balanceAfter": "Balance after",
+    "empty": "No ledger entries match the current filters.",
+    "noAccount": "Select an account to see its statement."
+  },
+  "flow": {
+    "depositIn": "Deposit in",
+    "unitsPurchased": "Units purchased",
+    "unitsSold": "Units sold",
+    "withdrawalOut": "Withdrawal out",
+    "fee": "Fee",
+    "adjustment": "Adjustment"
+  },
+  "direction": {
+    "debit": "Debit",
+    "credit": "Credit"
+  },
+  "statement": {
+    "title": "Account statement",
+    "nationalId": "National ID",
+    "iban": "IBAN",
+    "readOnlyNote": "This ledger is append-only — entries are never edited or removed. Corrections are posted as new adjustment entries."
+  },
+  "errors": {
+    "loadFailed": "Could not load the statement"
+  },
+  "common": {
+    "rial": "IRR"
+  }
+}

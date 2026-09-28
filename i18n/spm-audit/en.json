@@ -1,0 +1,98 @@
+{
+  "toolbar": {
+    "title": "Audit trail",
+    "description": "Append-only record of every change, with the full state before and after each one."
+  },
+  "actions": {
+    "refresh": "Refresh",
+    "reset": "Reset filters",
+    "expandAll": "Expand all",
+    "collapseAll": "Collapse all"
+  },
+  "filters": {
+    "title": "Filters",
+    "search": "Search",
+    "searchPlaceholder": "Entity, id, actor or a changed value…",
+    "entity": "Entity",
+    "action": "Action",
+    "actor": "Actor",
+    "allEntities": "All entities",
+    "allActions": "All actions",
+    "allActors": "All actors"
+  },
+  "table": {
+    "title": "Audit entries",
+    "summary": "Showing {{shown}} of {{total}}",
+    "toggle": "Toggle before/after details",
+    "occurredAt": "Occurred at",
+    "entity": "Entity",
+    "entityId": "Entity ID",
+    "action": "Action",
+    "actor": "Actor",
+    "emptySource": "No audit entries have been recorded yet.",
+    "emptyFiltered": "No audit entry matches the current filters."
+  },
+  "diff": {
+    "title": "Before / after",
+    "field": "Field",
+    "before": "Before",
+    "after": "After",
+    "changedCount": "{{changed}} of {{total}} fields changed",
+    "created": "— (created)",
+    "deleted": "— (deleted)",
+    "absent": "—",
+    "nullValue": "null",
+    "trueValue": "true",
+    "falseValue": "false",
+    "emptyValue": "(empty)",
+    "noFields": "No field-level state was recorded for this entry."
+  },
+  "action": {
+    "Created": "Created",
+    "Updated": "Updated",
+    "Deleted": "Deleted",
+    "StatusChanged": "Status changed",
+    "Approved": "Approved",
+    "Rejected": "Rejected"
+  },
+  "entity": {
+    "InvestmentRequest": "Investment request",
+    "InvestorAccount": "Investor account",
+    "Instrument": "Instrument",
+    "InstrumentRule": "Instrument rule",
+    "InvestmentOrder": "Investment order",
+    "PaymentTransaction": "Payment transaction",
+    "Settlement": "Settlement",
+    "LedgerEntry": "Ledger entry",
+    "ReconciliationRun": "Reconciliation run",
+    "Discrepancy": "Discrepancy",
+    "ManualAdjustment": "Manual adjustment",
+    "ResolutionCase": "Resolution case"
+  },
+  "field": {
+    "status": "Status",
+    "isActive": "Active",
+    "iban": "IBAN",
+    "reason": "Reason",
+    "effectiveTo": "Effective to",
+    "effectiveFrom": "Effective from",
+    "minAmount": "Minimum amount",
+    "maxAmount": "Maximum amount",
+    "minUnits": "Minimum units",
+    "cutOffTime": "Cut-off time",
+    "settlementDays": "Settlement days",
+    "secondApprover": "Second approver",
+    "firstApprover": "First approver",
+    "caseNumber": "Case number",
+    "requestNumber": "Request number",
+    "assignedTo": "Assigned to",
+    "amount": "Amount",
+    "units": "Units",
+    "navPerUnit": "NAV per unit",
+    "failureReason": "Failure reason",
+    "needsManualReview": "Needs manual review"
+  },
+  "error": {
+    "title": "The audit trail could not be loaded."
+  }
+}

@@ -1,0 +1,142 @@
+{
+  "toolbar": {
+    "title": "جزئیات درخواست",
+    "description": "مسیر کامل تسویه برای یک درخواست سرمایه‌گذاری."
+  },
+  "actions": {
+    "back": "بازگشت به صف درخواست‌ها"
+  },
+  "loading": "در حال بارگذاری درخواست…",
+  "error": {
+    "title": "بارگذاری درخواست ممکن نشد"
+  },
+  "notFound": {
+    "title": "درخواست یافت نشد",
+    "description": "درخواستی با این شناسه وجود ندارد. ممکن است حذف شده باشد یا نشانی مورد استفاده معتبر نباشد."
+  },
+  "cardex": {
+    "title": "کاردکس درخواست",
+    "requestNumber": "شماره درخواست",
+    "status": "وضعیت",
+    "investor": "سرمایه‌گذار",
+    "nationalId": "کد ملی",
+    "accountCode": "کد حساب کارگزاری",
+    "iban": "شماره شبا",
+    "instrument": "نماد",
+    "amount": "مبلغ (ریال)",
+    "units": "تعداد واحد",
+    "idempotencyKey": "کلید یکتایی درخواست",
+    "manualReview": "برای بررسی دستی علامت‌گذاری شده است"
+  },
+  "requestStatus": {
+    "Draft": "پیش‌نویس",
+    "Submitted": "ثبت‌شده",
+    "Validated": "اعتبارسنجی‌شده",
+    "AwaitingPayment": "در انتظار پرداخت",
+    "Paid": "پرداخت‌شده",
+    "OrderPlaced": "سفارش ارسال‌شده",
+    "PartiallyFilled": "اجرای جزئی",
+    "Filled": "اجرا‌شده",
+    "Settled": "تسویه‌شده",
+    "Rejected": "رد‌شده",
+    "Failed": "ناموفق",
+    "Cancelled": "لغو‌شده"
+  },
+  "timeline": {
+    "title": "روند تسویه",
+    "empty": "هیچ مرحله‌ای برای این درخواست ثبت نشده است.",
+    "actor": "عامل"
+  },
+  "stages": {
+    "submitted": "ثبت درخواست",
+    "validated": "اعتبارسنجی",
+    "payment": "پرداخت",
+    "saleProceeds": "وجه حاصل از فروش",
+    "order": "سفارش",
+    "settlement": "تسویه",
+    "complete": "تکمیل",
+    "closed": "بسته‌شده"
+  },
+  "stageState": {
+    "done": "انجام‌شده",
+    "current": "در حال انجام",
+    "pending": "در انتظار",
+    "failed": "ناموفق",
+    "skipped": "رد‌شده"
+  },
+  "order": {
+    "title": "سفارش",
+    "none": "هنوز سفارشی برای این درخواست ثبت نشده است.",
+    "side": "سمت معامله",
+    "status": "وضعیت",
+    "omsRef": "شناسه سفارش در سامانه معاملات",
+    "price": "قیمت (ریال)",
+    "placedAt": "زمان ارسال سفارش",
+    "lastPolledAt": "آخرین استعلام وضعیت",
+    "filled": "اجرا‌شده",
+    "failureReason": "علت ناموفق بودن"
+  },
+  "orderSide": {
+    "Buy": "خرید",
+    "Sell": "فروش"
+  },
+  "orderStatus": {
+    "Pending": "در انتظار",
+    "AwaitingResponse": "در انتظار پاسخ",
+    "Partial": "اجرای جزئی",
+    "Executed": "اجرا‌شده",
+    "Cancelled": "لغو‌شده",
+    "Failed": "ناموفق"
+  },
+  "events": {
+    "title": "رویدادهای سفارش",
+    "empty": "رویدادی برای این سفارش ثبت نشده است.",
+    "occurredAt": "زمان وقوع",
+    "action": "اقدام",
+    "detail": "شرح",
+    "actor": "عامل"
+  },
+  "settlement": {
+    "title": "تسویه",
+    "none": "هنوز تسویه‌ای برنامه‌ریزی نشده است.",
+    "status": "وضعیت",
+    "paidAt": "زمان پرداخت",
+    "tradeDate": "تاریخ معامله",
+    "dueDate": "سررسید تسویه",
+    "gross": "مبلغ ناخالص (ریال)",
+    "fee": "کارمزد (ریال)",
+    "net": "خالص قابل پرداخت (ریال)",
+    "failureReason": "علت ناموفق بودن"
+  },
+  "settlementStatus": {
+    "PendingSale": "در انتظار فروش",
+    "SaleExecuted": "فروش انجام‌شده",
+    "PendingSettlement": "در انتظار تسویه",
+    "Settled": "تسویه‌شده",
+    "Delayed": "با تأخیر",
+    "Failed": "ناموفق",
+    "Reversed": "برگشت‌خورده"
+  },
+  "ledger": {
+    "title": "اقلام دفتر کل",
+    "empty": "هیچ قلمی از دفتر کل به این درخواست مرتبط نیست.",
+    "valueDate": "تاریخ ارزش",
+    "flow": "نوع گردش",
+    "direction": "جهت",
+    "amount": "مبلغ (ریال)",
+    "balanceAfter": "مانده پس از ثبت",
+    "description": "شرح"
+  },
+  "ledgerFlow": {
+    "DepositIn": "واریز ورودی",
+    "UnitsPurchased": "خرید واحد",
+    "UnitsSold": "فروش واحد",
+    "WithdrawalOut": "برداشت خروجی",
+    "Fee": "کارمزد",
+    "Adjustment": "اصلاحیه"
+  },
+  "ledgerDirection": {
+    "Debit": "بدهکار",
+    "Credit": "بستانکار"
+  }
+}

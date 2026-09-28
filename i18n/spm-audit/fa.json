@@ -1,0 +1,98 @@
+{
+  "toolbar": {
+    "title": "ردیابی تغییرات",
+    "description": "سابقهٔ فقط‌افزودنی همهٔ تغییرات، همراه با وضعیت کامل پیش و پس از هر تغییر."
+  },
+  "actions": {
+    "refresh": "بازخوانی",
+    "reset": "حذف فیلترها",
+    "expandAll": "باز کردن همه",
+    "collapseAll": "بستن همه"
+  },
+  "filters": {
+    "title": "فیلترها",
+    "search": "جست‌وجو",
+    "searchPlaceholder": "موجودیت، شناسه، عامل یا مقدار تغییریافته…",
+    "entity": "موجودیت",
+    "action": "نوع تغییر",
+    "actor": "عامل تغییر",
+    "allEntities": "همهٔ موجودیت‌ها",
+    "allActions": "همهٔ تغییرات",
+    "allActors": "همهٔ عامل‌ها"
+  },
+  "table": {
+    "title": "رکوردهای تغییرات",
+    "summary": "نمایش {{shown}} از {{total}}",
+    "toggle": "نمایش یا پنهان‌کردن وضعیت پیش و پس",
+    "occurredAt": "زمان رخداد",
+    "entity": "موجودیت",
+    "entityId": "شناسهٔ موجودیت",
+    "action": "نوع تغییر",
+    "actor": "عامل تغییر",
+    "emptySource": "هنوز هیچ تغییری ثبت نشده است.",
+    "emptyFiltered": "هیچ رکوردی با فیلترهای انتخاب‌شده مطابقت ندارد."
+  },
+  "diff": {
+    "title": "وضعیت پیش و پس از تغییر",
+    "field": "فیلد",
+    "before": "پیش از تغییر",
+    "after": "پس از تغییر",
+    "changedCount": "{{changed}} فیلد از {{total}} فیلد تغییر کرده است",
+    "created": "— (ایجاد شده)",
+    "deleted": "— (حذف شده)",
+    "absent": "—",
+    "nullValue": "بدون مقدار",
+    "trueValue": "بله",
+    "falseValue": "خیر",
+    "emptyValue": "(خالی)",
+    "noFields": "برای این رکورد، وضعیت فیلدها ثبت نشده است."
+  },
+  "action": {
+    "Created": "ایجاد",
+    "Updated": "ویرایش",
+    "Deleted": "حذف",
+    "StatusChanged": "تغییر وضعیت",
+    "Approved": "تأیید",
+    "Rejected": "رد"
+  },
+  "entity": {
+    "InvestmentRequest": "درخواست سرمایه‌گذاری",
+    "InvestorAccount": "حساب سرمایه‌گذار",
+    "Instrument": "ابزار سرمایه‌گذاری",
+    "InstrumentRule": "قواعد ابزار سرمایه‌گذاری",
+    "InvestmentOrder": "سفارش سرمایه‌گذاری",
+    "PaymentTransaction": "تراکنش پرداخت",
+    "Settlement": "تسویه",
+    "LedgerEntry": "سند دفتر کل",
+    "ReconciliationRun": "اجرای مغایرت‌گیری",
+    "Discrepancy": "مغایرت",
+    "ManualAdjustment": "اصلاح دستی",
+    "ResolutionCase": "پروندهٔ رسیدگی"
+  },
+  "field": {
+    "status": "وضعیت",
+    "isActive": "فعال",
+    "iban": "شماره شبا",
+    "reason": "دلیل",
+    "effectiveTo": "معتبر تا",
+    "effectiveFrom": "معتبر از",
+    "minAmount": "حداقل مبلغ",
+    "maxAmount": "حداکثر مبلغ",
+    "minUnits": "حداقل تعداد واحد",
+    "cutOffTime": "ساعت قطع سفارش",
+    "settlementDays": "روزهای تسویه",
+    "secondApprover": "تأییدکنندهٔ دوم",
+    "firstApprover": "تأییدکنندهٔ اول",
+    "caseNumber": "شمارهٔ پرونده",
+    "requestNumber": "شمارهٔ درخواست",
+    "assignedTo": "ارجاع به",
+    "amount": "مبلغ",
+    "units": "تعداد واحد",
+    "navPerUnit": "خالص ارزش هر واحد",
+    "failureReason": "دلیل خطا",
+    "needsManualReview": "نیازمند بررسی دستی"
+  },
+  "error": {
+    "title": "ردیابی تغییرات بارگذاری نشد."
+  }
+}
